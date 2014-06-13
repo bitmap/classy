@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!-- When you click the button, the div with class 'pizza' should change to
+     'the test worked'-->
+
+<button id="button">TEST</button>
+
+<div class="pizza"></div>
+
+<script src="cla$$.min.js" type="text/javascript"></script>
+<script>
+  var $ = function(e) {
+    return document.querySelector(e);
+  },
+  butt = document.getElementById('button');
+
+  butt.addEventListener('click', function() {
+    cla$$.add($('.pizza'), 'the');
+    cla$$.toggle($('.pizza'), 'test')
+    if (cla$$.contains($('.pizza'), 'test'))
+      cla$$.add($('.pizza'), 'worked')
+    cla$$.remove($('.pizza'), 'pizza')
+  });
+</script>
