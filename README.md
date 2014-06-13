@@ -1,6 +1,6 @@
-# dolla (cla$$)
+# cla$$.js
 
-**cla$$** lets you manipulate class names. For oldies that don't
+**cla$$.js** lets you manipulate class names. For oldies that don't
 support `element.classList`, and for homies that don't want any nonsense.
 It's nice and tight, just over 600 bytes minified.
 
