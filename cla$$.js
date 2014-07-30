@@ -3,9 +3,13 @@ var cla$$ = (function($$) {
 
   var classList = document.documentElement.classList;
 
+  function findClass(className) {
+    return new RegExp('(^|\\s)*' + className + '(\\s|$)*', 'g')
+  }
+
   $$.contains = function(el, className) {
     if (classList) return el.classList.contains(className);
-    return (new RegExp('(^|\\s)*' + className + '(\\s|$)*')).test(el.className);
+    return (findClass(className)).test(el.className);
   };
 
   $$.add = function(el, className) {
@@ -14,9 +18,9 @@ var cla$$ = (function($$) {
   };
 
   $$.remove = function(el, className) {
+    if (!el || !el.className) return;
     if (classList) el.classList.remove(className);
-    else if (!el || !el.className) return;
-    el.className = el.className.replace(new RegExp('(^|\\s)*' + className + '(\\s|$)*', 'g'), '');
+    el.className = el.className.replace(findClass(className), '');
   };
 
   $$.toggle = function(el, className) {
