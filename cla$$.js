@@ -3,30 +3,30 @@ var cla$$ = (function($$) {
 
   var classList = document.documentElement.classList;
 
-  function findClass(className) {
-    return new RegExp('(^|\\s)*' + className + '(\\s|$)*', 'g')
+  function returnClass(string) {
+    return new RegExp('(^|\\s)*' + string + '(\\s|$)*', 'g');
   }
 
-  $$.contains = function(el, className) {
-    if (classList) return el.classList.contains(className);
-    return (findClass(className)).test(el.className);
+  $$.contains = function(_el, _class) {
+    if (classList) return _el.classList.contains(_class);
+    return returnClass(_class).test(_el.className);
   };
 
-  $$.add = function(el, className) {
-    if (classList) el.classList.add(className);
-    else if (!$$.contains(el, className)) el.className += ' ' + className;
+  $$.add = function(_el, _class) {
+    if (classList) _el.classList.add(_class);
+    else if (!$$.contains(_el, _class)) _el.className += ' ' + _class;
   };
 
-  $$.remove = function(el, className) {
-    if (!el || !el.className) return;
-    if (classList) el.classList.remove(className);
-    el.className = el.className.replace(findClass(className), '');
+  $$.remove = function(_el, _class) {
+    if (!_el || !_el.className) return;
+    if (classList) _el.classList.remove(_class);
+    _el.className = _el.className.replace(returnClass(_class), '');
   };
 
-  $$.toggle = function(el, className) {
-    if (classList) el.classList.toggle(className);
-    else if ($$.contains(el, className)) $$.remove(el, className);
-    else $$.add(el, className);
+  $$.toggle = function(_el, _class) {
+    if (classList) _el.classList.toggle(_class);
+    else if ($$.contains(_el, _class)) $$.remove(_el, _class);
+    else $$.add(_el, _class);
   };
 
   return $$;
