@@ -7,26 +7,28 @@ var cla$$ = (function($$) {
     return new RegExp('(^|\\s)*' + string + '(\\s|$)*', 'g');
   }
 
-  $$.contains = function(_el, _class) {
-    if (classList) return _el.classList.contains(_class);
-    return returnClass(_class).test(_el.className);
-  };
+  $$ = {
+    contains: function(_el, _class) {
+      if (classList) return _el.classList.contains(_class);
+      return returnClass(_class).test(_el.className);
+    },
 
-  $$.add = function(_el, _class) {
-    if (classList) _el.classList.add(_class);
-    else if (!$$.contains(_el, _class)) _el.className += ' ' + _class;
-  };
+    add: function(_el, _class) {
+      if (classList) _el.classList.add(_class);
+      else if (!this.contains(_el, _class)) _el.className += ' ' + _class;
+    },
 
-  $$.remove = function(_el, _class) {
-    if (!_el || !_el.className) return;
-    if (classList) _el.classList.remove(_class);
-    _el.className = _el.className.replace(returnClass(_class), '');
-  };
+    remove: function(_el, _class) {
+      if (!_el || !_el.className) return;
+      if (classList) _el.classList.remove(_class);
+      _el.className = _el.className.replace(returnClass(_class), '');
+    },
 
-  $$.toggle = function(_el, _class) {
-    if (classList) _el.classList.toggle(_class);
-    else if ($$.contains(_el, _class)) $$.remove(_el, _class);
-    else $$.add(_el, _class);
+    toggle: function(_el, _class) {
+      if (classList) _el.classList.toggle(_class);
+      else if (this.contains(_el, _class)) this.remove(_el, _class);
+      else this.add(_el, _class);
+    }
   };
 
   return $$;
