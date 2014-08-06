@@ -1,4 +1,4 @@
-var cla$$ = (function($$) {
+var cla$$ = (function($_$) {
   'use strict';
 
   var classList = document.documentElement.classList;
@@ -7,9 +7,9 @@ var cla$$ = (function($$) {
     return new RegExp('(^|\\s)*' + string + '(\\s|$)*', 'g');
   }
 
-  function $$(selector) {
-    if (!(this instanceof $$)) {
-      return new $$(selector);
+  function $_$(selector) {
+    if (!(this instanceof $_$)) {
+      return new $_$(selector);
     }
 
     if(typeof selector === 'string') {
@@ -21,7 +21,7 @@ var cla$$ = (function($$) {
     }
   }
 
-  $$.prototype = {
+  $_$.prototype = {
     contains: function(stuff) {
       if (classList) return this.el.classList.contains(stuff);
       return returnClass(stuff).test(this.el.className);
@@ -45,6 +45,6 @@ var cla$$ = (function($$) {
     }
   };
 
-  return $$;
+  return $_$;
 
 })(cla$$ || {});
