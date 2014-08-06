@@ -19,7 +19,6 @@ var cla$$ = (function($$) {
     },
 
     remove: function(_el, _class) {
-      if (!_el || !_el.className) return;
       if (classList) _el.classList.remove(_class);
       _el.className = _el.className.replace(returnClass(_class), '');
     },
