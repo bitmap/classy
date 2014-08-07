@@ -4,14 +4,14 @@ var cla$$ = (function($_$) {
   var classList = document.documentElement.classList;
 
   function returnClass(string) {
-    return new RegExp('(^| )' + string + '( |$)', 'gi');
+    return new RegExp('(^| )' + string + '( |$)', 'g');
   }
 
   function $_$(selector) {
     if (!(this instanceof $_$)) {
       return new $_$(selector);
     }
-    if(typeof selector === 'string') {
+    if (typeof selector === 'string') {
       this.el = document.querySelector(selector);
     }
     if (typeof selector === 'object' && document.body.nodeType) {
@@ -30,7 +30,7 @@ var cla$$ = (function($_$) {
     },
     remove: function(stuff) {
       if (classList) this.el.classList.remove(stuff);
-      this.el.className = this.el.className.replace(returnClass(stuff), '');
+      this.el.className = this.el.className.replace(returnClass(stuff), ' ');
     },
     toggle: function(stuff) {
       if (classList) this.el.classList.toggle(stuff);
