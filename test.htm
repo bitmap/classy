@@ -9,22 +9,30 @@
 
 <body>
   <div class="pizza sauce"></div>
+  <div id="test" class="pizza sauce"></div>
 
   <script src="cla$$.js" type="text/javascript"></script>
-
   <script>
+    var test = document.querySelector('#test');
+    var pizza = document.querySelector('.pizza');
 
     function pizzaTest() {
-      cla$$('.pizza').add('the');
-      cla$$('.pizza').toggle('test')
-      cla$$('.pizza').toggle('sauce')
-      if (cla$$('.pizza').contains('pizza')) 
-        {cla$$('.pizza').add('worked')}
-      cla$$('.pizza').remove('pizza')
+
+      cla$$(pizza).add('the');
+      cla$$(pizza).toggle('test')
+      cla$$(pizza).toggle('sauce')
+      if (cla$$(pizza).contains('pizza')) 
+        {cla$$(pizza).add('worked')}
+      cla$$(pizza).remove('pizza')
+
+      cla$$(test).add('the');
+      cla$$(test).toggle('test')
+      cla$$(test).toggle('sauce')
+      if (cla$$(test).contains('pizza')) 
+        {cla$$(test).add('worked')}
+      cla$$(test).remove('pizza')
     }
 
-    if (window.addEventListener) 
-      window.addEventListener('load', pizzaTest);
-    else window.attachEvent('onload', pizzaTest)
+    window.addEventListener('load', pizzaTest);
   </script>
 </body>
