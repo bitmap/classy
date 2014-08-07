@@ -4,7 +4,7 @@ var cla$$ = (function($_$) {
   var classList = document.documentElement.classList;
 
   function returnClass(string) {
-    return new RegExp('(^|\\s)*' + string + '(\\s|$)*', 'g');
+    return new RegExp('(^| )' + string + '( |$)', 'gi')
   }
 
   function $_$(selector) {
@@ -33,7 +33,6 @@ var cla$$ = (function($_$) {
     },
 
     remove: function(stuff) {
-      if (!this.el || !this.el.className) return;
       if (classList) this.el.classList.remove(stuff);
       this.el.className = this.el.className.replace(returnClass(stuff), '');
     },
