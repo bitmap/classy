@@ -1,44 +1,35 @@
-var cla$$ = (function($_$) {
+var cla$$ = (function($$) {
   'use strict';
 
   var classList = document.documentElement.classList;
 
   function returnClass(string) {
-    return new RegExp('(^| )' + string + '( |$)', 'gi');
+    return new RegExp('(^|\\s)*' + string + '(\\s|$)*', 'g');
   }
 
-  function $_$(selector) {
-    if (!(this instanceof $_$)) {
-      return new $_$(selector);
-    }
-    if(typeof selector === 'string') {
-      this.el = document.querySelector(selector);
-    }
-    if (typeof selector === 'object' && document.body.nodeType) {
-      this.el = selector;
-    }
-  }
+  $$ = {
+    contains: function(_el, _class) {
+      if (classList) return _el.classList.contains(_class);
+      return returnClass(_class).test(_el.className);
+    },
 
-  $_$.prototype = {
-    contains: function(stuff) {
-      if (classList) return this.el.classList.contains(stuff);
-      return returnClass(stuff).test(this.el.className);
+    add: function(_el, _class) {
+      if (classList) _el.classList.add(_class);
+      if (!this.contains(_el, _class)) _el.className += ' ' + _class;
     },
-    add: function(stuff) {
-      if (classList) this.el.classList.add(stuff);
-      else if (!this.contains(stuff)) this.el.className += ' ' + stuff;
+
+    remove: function(_el, _class) {
+      if (classList) _el.classList.remove(_class);
+      _el.className = _el.className.replace(returnClass(_class), '');
     },
-    remove: function(stuff) {
-      if (classList) this.el.classList.remove(stuff);
-      this.el.className = this.el.className.replace(returnClass(stuff), '');
-    },
-    toggle: function(stuff) {
-      if (classList) this.el.classList.toggle(stuff);
-      else if (this.contains(stuff)) this.remove(stuff);
-      else this.add(stuff);
+
+    toggle: function(_el, _class) {
+      if (classList) _el.classList.toggle(_class);
+      if (this.contains(_el, _class)) this.remove(_el, _class);
+      else this.add(_el, _class);
     }
   };
 
-  return $_$;
+  return $$;
 
 })(cla$$ || {});

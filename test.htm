@@ -15,12 +15,14 @@
   <script>
 
     function pizzaTest() {
-      cla$$('.pizza').add('the');
-      cla$$('.pizza').toggle('test')
-      cla$$('.pizza').toggle('sauce')
-      if (cla$$('.pizza').contains('pizza')) 
-        {cla$$('.pizza').add('worked')}
-      cla$$('.pizza').remove('pizza')
+
+      var pizza = document.querySelector('.pizza')
+      cla$$.add(pizza,'the');
+      cla$$.toggle(pizza,'test')
+      cla$$.toggle(pizza,'sauce')
+      if (cla$$.contains(pizza,'pizza')) 
+        {cla$$.add(pizza,'worked')}
+      cla$$.remove(pizza,'pizza')
     }
 
     if (window.addEventListener) 
