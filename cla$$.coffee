@@ -5,11 +5,11 @@ cla$$ = (($_$) ->
   classList = document.documentElement.classList
 
   returnClass = (string) -> 
-    new RegExp('(^|\\s)*' + string + '(\\s|$)*', 'g')
+    new RegExp('(^| )' + string + '( |$)', 'gi')
 
   $_$ = (selector) ->
     if !(this instanceof $_$) 
-      return new $_$(selector);
+      new $_$(selector);
 
     if typeof selector == 'string'
       this.el = document.querySelector(selector);
