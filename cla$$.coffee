@@ -1,4 +1,4 @@
-cla$$ = (($$) ->
+cla$$ = (($_$) ->
   
   'use strict'
 
@@ -7,28 +7,38 @@ cla$$ = (($$) ->
   returnClass = (string) -> 
     new RegExp('(^|\\s)*' + string + '(\\s|$)*', 'g')
 
-  $$ = {
-    contains: (elem, stuff) -> 
-      elem.classList.contains stuff if classList
-      returnClass(stuff).test(elem.className)
+  $_$ = (selector) ->
+    if !(this instanceof $_$) 
+      return new $_$(selector);
 
-    add: (elem, stuff) -> 
-      elem.classList.add stuff if classList
-      elem.className += " " + stuff unless @contains(elem, stuff)
+    if typeof selector == 'string'
+      this.el = document.querySelector(selector);
 
-    remove: (elem, stuff) -> 
-      elem.classList.remove stuff if classList
-      elem.className = elem.className.replace(returnClass(stuff), '')
+    if typeof selector == 'object' && document.body.nodeType
+      this.el = selector;
 
-    toggle: (elem, stuff) -> 
+  $_$.prototype = {
+    contains: (stuff) -> 
+      this.el.classList.contains stuff if classList
+      returnClass(stuff).test(this.el.className)
+
+    add: (stuff) -> 
+      this.el.classList.add stuff if classList
+      this.el.className += " " + stuff unless @contains(stuff)
+
+    remove: (stuff) -> 
+      this.el.classList.remove stuff if classList
+      this.el.className = this.el.className.replace(returnClass(stuff), '')
+
+    toggle: (stuff) -> 
       if classList
-        elem.classList.toggle stuff 
-      else if @contains(elem, stuff)
-        @remove(elem, stuff)
+        this.el.classList.toggle stuff 
+      else if @contains(stuff)
+        @remove(stuff)
       else 
-        @add(elem, stuff)
+        @add(stuff)
   }
 
-  $$;
+  $_$;
   
 )(cla$$ or {})
