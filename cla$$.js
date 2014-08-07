@@ -12,9 +12,9 @@ var cla$$ = (function($_$) {
       return new $_$(selector);
     }
     if (typeof selector === 'string') {
-      this.elem = document.querySelector;
+      this.elem = document.querySelector(selector);
     }
-    if (typeof selector === 'object' && document.body.nodeType) {
+    if (typeof selector === 'object' && selector.nodeType) {
       this.elem = selector;
     }
   }
