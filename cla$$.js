@@ -14,7 +14,7 @@ var cla$$ = (function($_$) {
     if (typeof selector === 'string') {
       this.elem = document.querySelector(selector);
     }
-    if (typeof selector === 'object' && selector.nodeType) {
+    if (typeof selector === 'object' && selector.nodeType || selector === window) {
       this.elem = selector;
     }
   }
@@ -36,6 +36,11 @@ var cla$$ = (function($_$) {
       if (classList) this.elem.classList.toggle(Class);
       else if (this.contains(Class)) this.remove(Class);
       else this.add(Class);
+    },
+    event: function(evnt, funct) {
+      if (this.elem.addEventListener) return this.elem.addEventListener(evnt, funct, false);
+      return this.elem.attachEvent('on' + evnt, funct);
+      //todo normalize for IE8
     }
   };
 
