@@ -1,49 +1,43 @@
 var cla$$ = (function($_$) {
   'use strict';
-
-  var classList = document.documentElement.classList;
-
-  function returnClass(string) {
-    return new RegExp('(^| )' + string + '( |$)', 'g');
-  }
+  var classList = document.documentElement.classList,
+      get_class = function(string) {return new RegExp('(^| )' + string + '( |$)', 'g');}
 
   function $_$(selector) {
     if (!(this instanceof $_$)) {
       return new $_$(selector);
     }
     if (typeof selector === 'string') {
-      this.elem = document.querySelector(selector);
+      this.el = document.querySelector(selector);
     }
     if (typeof selector === 'object' && selector.nodeType || selector === window) {
-      this.elem = selector;
+      this.el = selector;
     }
   }
 
   $_$.prototype = {
-    contains: function(Class) {
-      if (classList) return this.elem.classList.contains(Class);
-      return returnClass(Class).test(this.elem.className);
+    contains: function(_class) {
+      if (classList) return this.el.classList.contains(_class);
+      return get_class(_class).test(this.el.className);
     },
-    add: function(Class) {
-      if (classList) this.elem.classList.add(Class);
-      else if (!this.contains(Class)) this.elem.className += ' ' + Class;
+    add: function(_class) {
+      if (classList) this.el.classList.add(_class);
+      else if (!this.contains(_class)) this.el.className += ' ' + _class;
     },
-    remove: function(Class) {
-      if (classList) this.elem.classList.remove(Class);
-      this.elem.className = this.elem.className.replace(returnClass(Class), ' ');
+    remove: function(_class) {
+      if (classList) this.el.classList.remove(_class);
+      this.el.className = this.el.className.replace(get_class(_class), ' ');
     },
-    toggle: function(Class) {
-      if (classList) this.elem.classList.toggle(Class);
-      else if (this.contains(Class)) this.remove(Class);
-      else this.add(Class);
+    toggle: function(_class) {
+      if (classList) this.el.classList.toggle(_class);
+      else if (this.contains(_class)) this.remove(_class);
+      else this.add(_class);
     },
-    event: function(evnt, funct) {
-      if (this.elem.addEventListener) return this.elem.addEventListener(evnt, funct, false);
-      return this.elem.attachEvent('on' + evnt, funct);
-      //todo normalize for IE8
+    event: function(ev, fn, cap) {
+      if (this.el.addEventListener) return this.el.addEventListener(ev, fn, !!cap);
+      else this.el.attachEvent('on' + ev, fn);
     }
   };
 
   return $_$;
-
 })(cla$$ || {});

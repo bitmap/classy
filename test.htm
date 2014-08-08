@@ -2,15 +2,15 @@
 <title>~ Cla$$ ~</title>
 <style>
   .the.test.worked:before 
-    {content: "PASSED"; color: green;}
+    {content: "PASSED "; color: green;}
   .TEST:after 
-    {content: " CLICK"; color: black;}
+    {content: " CLICK!"; color: black;}
   .pizza:before,.sauce:before,.the:before,.test:before,.worked:before,.the.test:before,.the.worked:before,.test.worked:before,.the.test.worked.pizza:before,.the.test.worked.sauce:before 
-    {content: "FAILED"; color: red;} 
+    {content: "FAILED "; color: red;} 
 </style>
 
 <body>
-  <div class="pizza sauce"></div>
+  <div class="pizza sauce">TEST</div>
 
   <script src="cla$$.js" type="text/javascript"></script>
   <script>
@@ -18,20 +18,16 @@
     $ = cla$$;
 
     function pizzaTest() {
+      $(pizza).add('the');
+      $(pizza).toggle('test')
+      $(pizza).toggle('sauce')
+      if ($(pizza).contains('pizza')) $(pizza).add('worked')
+      $(pizza).remove('pizza')
 
-      console.log(pizza)
-      $('.pizza').add('the');
-      $('.pizza').toggle('test')
-      $('.pizza').toggle('sauce')
-      if ($('.pizza').contains('pizza')) 
-        {$('.pizza').add('worked')}
-      $('.pizza').remove('pizza')
+      $('div').event('click', function() {
+        $('div').add('TEST')
+      })
     }
-
-    $('.pizza').event('click', function() {
-      $(this).add('TEST')
-      console.log(this)
-    })
 
     $(window).event('load', pizzaTest);
   </script>
