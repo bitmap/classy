@@ -7,18 +7,18 @@ It's nice and tight, just over 500 bytes minified.
 Basic syntax is like
 
 ```js
-cla$$.add(element, class)
-cla$$.remove(element, class)
-cla$$.toggle(element, class)
-cla$$.contains(element, class)
+cla$$(element).add(class)
+cla$$(element).remove(class)
+cla$$(element).toggle(class)
+cla$$(element).contains(class)
 ```
 
 && you can do cool stuff like
 
 ```js
 element.addEventListener('click', function() {
-  if (cla$$.contains(element, 'pizza'))
-    cla$$.add(element, 'pepperoni')
+  if (cla$$(element).contains('pizza'))
+    cla$$(element).add('pepperoni')
 });
 ```
 

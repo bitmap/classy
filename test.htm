@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <title>~ Cla$$ ~</title>
 <style>
-  .the.test.worked:after 
-    {content: "PASSED"; color: green;}
-  .pizza:after,.sauce:after,.the:after,.test:after,.worked:after,.the.test:after,.the.worked:after,.test.worked:after,.the.test.worked.pizza:after,.the.test.worked.sauce:after 
-    {content: "FAILED"; color: red;} 
+  .the.test.worked:before 
+    {content: "PASSED "; color: green;}
+  .TEST:after 
+    {content: " CLICK!"; color: black;}
+  .pizza:before,.sauce:before,.the:before,.test:before,.worked:before,.the.test:before,.the.worked:before,.test.worked:before,.the.test.worked.pizza:before,.the.test.worked.sauce:before 
+    {content: "FAILED "; color: red;} 
 </style>
 
 <body>
-  <div class="pizza sauce"></div>
+  <div class="pizza sauce">TEST</div>
 
   <script src="cla$$.js" type="text/javascript"></script>
-
   <script>
+    var pizza = document.querySelector('div');
+    $ = cla$$;
 
     function pizzaTest() {
-
       var pizza = document.querySelector('.pizza')
       cla$$.add(pizza,'the');
       cla$$.toggle(pizza,'test')
       cla$$.toggle(pizza,'sauce')
-      if (cla$$.contains(pizza,'pizza')) 
-        {cla$$.add(pizza,'worked')}
-      cla$$.remove(pizza,'pizza')
-    }
+      if ($(pizza).contains('pizza')) $(pizza).add('worked')
+      $(pizza).remove('pizza')
 
-    if (window.addEventListener) 
-      window.addEventListener('load', pizzaTest);
-    else window.attachEvent('onload', pizzaTest)
+      $('div').event('click', function() {
+        $('div').add('TEST')
+      })
+
+
+    $(window).event('load', pizzaTest);
   </script>
 </body>
