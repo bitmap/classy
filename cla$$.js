@@ -1,11 +1,11 @@
-var cla$$ = (function($_$) {
+var cla$$ = (function() {
   'use strict';
   var classList = document.documentElement.classList,
       get_class = function(string) {return new RegExp('(^| )' + string + '( |$)', 'g');}
 
-  function $_$(selector) {
-    if (!(this instanceof $_$)) {
-      return new $_$(selector);
+  function RAD(selector) {
+    if (!(this instanceof RAD)) {
+      return new RAD(selector);
     }
     if (typeof selector === 'string') {
       this.el = document.querySelector(selector);
@@ -15,7 +15,7 @@ var cla$$ = (function($_$) {
     }
   }
 
-  $_$.prototype = {
+  RAD.prototype = {
     contains: function(_class) {
       if (classList) return this.el.classList.contains(_class);
       return get_class(_class).test(this.el.className);
@@ -39,5 +39,5 @@ var cla$$ = (function($_$) {
     }
   };
 
-  return $_$;
-})(cla$$ || {});
+  return RAD;
+})();
