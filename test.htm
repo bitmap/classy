@@ -19,16 +19,15 @@
 
     function pizzaTest() {
       var pizza = document.querySelector('.pizza')
-      cla$$.add(pizza,'the');
-      cla$$.toggle(pizza,'test')
-      cla$$.toggle(pizza,'sauce')
+      $(pizza).add('the');
+      $(pizza).toggle('test')
+      $(pizza).toggle('sauce')
       if ($(pizza).contains('pizza')) $(pizza).add('worked')
       $(pizza).remove('pizza')
-
       $('div').event('click', function() {
         $('div').add('TEST')
       })
-
+    }
 
     $(window).event('load', pizzaTest);
   </script>
