@@ -11,7 +11,7 @@ cla$$(element).add(class)
 cla$$(element).remove(class)
 cla$$(element).toggle(class)
 cla$$(element).contains(class)
-cla$$(element).event('event', function({...}))
+cla$$(element).event('event', function() {...})
 ```
 
 && you can do cool stuff like
