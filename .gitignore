@@ -1,2 +1,1 @@
-*.coffee
-*.beautified.js
+node_modules
