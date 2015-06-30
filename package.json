@@ -1,0 +1,28 @@
+{
+  "name": "classy",
+  "version": "1.0.0",
+  "description": "Cross-browser classList and event micro-library",
+  "main": "cla$$.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cabebr/classy.git"
+  },
+  "author": "Cabe Branson (@cabebr)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cabebr/classy/issues"
+  },
+  "homepage": "https://github.com/cabebr/classy#readme",
+  "devDependencies": {
+    "chai": "^3.0.0",
+    "gulp": "^3.9.0",
+    "gulp-jshint": "^1.11.1",
+    "gulp-mocha-phantomjs": "^0.6.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.2.0",
+    "jshint-stylish": "^2.0.1",
+    "mocha": "^2.2.5",
+    "mocha-phantomjs": "^3.5.3",
+    "phantomjs": "^1.9.17"
+  }
+}

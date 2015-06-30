@@ -1,5 +1,3 @@
-/* jshint expr: true, laxbreak: true */
-
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     //AMD
@@ -30,25 +28,14 @@
       return new RegExp('(^| )' + string + '( |$)', 'g');
   }
 
-  function eachSelector(classes) {
-    classes = Array.prototype.slice.call(arguments, 1);
-    for (var i = classes.length; i--;) {
-      classes[i];
-      console.log(classes[i]);
-    }
-  }
-
   document.documentElement.classList
 
     ? Classy.prototype = {
       contains: function(selector) {
         return this.el.classList.contains(selector);
       },
-      add: function() {
-        var classes = arguments;
-        for (var i = 0, length = classes.length; i < length; i++) {
-          this.el.classList.add(classes[i]);
-        }
+      add: function(selector) {
+        this.el.classList.add(selector);
       },
       remove: function(selector) {
         this.el.classList.remove(selector);
