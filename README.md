@@ -1,28 +1,34 @@
 # cla$$.js
 
-**cla$$.js** lets you manipulate class names. For oldies that don't
-support `element.classList`, and for homies that don't want any nonsense.
-It's nice and tight, just over 500 bytes minified.
+**cla$$.js** is a DOM class manipulation and event micro-library for oldies that don't support `classList` or `addEventListener` APIs. It's nice and tight, just over 1k minified.
 
-Basic syntax is like
+It supports `add`, `remove`, `toggle`, `contains`, and `on` methods.
+
+cla$$ also uses `document.querySelector` to query the DOM. You can return and element using the `.element` method.
 
 ```js
-cla$$(element).add(class)
-cla$$(element).remove(class)
-cla$$(element).toggle(class)
-cla$$(element).contains(class)
-cla$$(element).on('event', function() {...})
+cla$$('.pizza').element === document.querySelector('.pizza') // true
+```
+
+You can add, remove or toggle class names:
+```js
+cla$$('.pizza').add('cheese');
+cla$$('.pizza').remove('olives');
+cla$$('.pizza').toggle('pepperoni');
 ```
 
 && you can do cool stuff like
 
 ```js
-cla$$(element).on('click', function() {
-  if (cla$$(element).contains('pizza'))
-    cla$$(element).add('pepperoni')
+var pizza = cla$$('.pizza');
+
+pizza.on('click', function() {
+  if (pizza.contains('sausage')) {
+    pizza.add('pineapple');
+  }
 });
 ```
 
 Try it with all your favorite toppings.
 
-dolla dolla bill y'all.
+Dolla dolla bill y'all.
