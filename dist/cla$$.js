@@ -17,10 +17,10 @@
       return new Classy(selector);
     }
     if (typeof selector === 'string') {
-      this.el = document.querySelector(selector);
+      this.element = document.querySelector(selector);
     }
     if (typeof selector === 'object' && selector.nodeType || selector === window) {
-      this.el = selector;
+      this.element = selector;
     }
   }
 
@@ -32,28 +32,28 @@
 
     ? Classy.prototype = {
       contains: function(selector) {
-        return this.el.classList.contains(selector);
+        return this.element.classList.contains(selector);
       },
       add: function(selector) {
-        this.el.classList.add(selector);
+        this.element.classList.add(selector);
       },
       remove: function(selector) {
-        this.el.classList.remove(selector);
+        this.element.classList.remove(selector);
       },
       toggle: function(selector) {
-        this.el.classList.toggle(selector);
+        this.element.classList.toggle(selector);
       }
     }
 
     : Classy.prototype = {
       contains: function(selector) {
-        return find(selector).test(this.el.className);
+        return find(selector).test(this.element.className);
       },
       add: function(selector) {
-        if (!this.contains(selector)) this.el.className += ' ' + selector;
+        if (!this.contains(selector)) this.element.className += ' ' + selector;
       },
       remove: function(selector) {
-        this.el.className = this.el.className.replace(find(selector), ' ');
+        this.element.className = this.element.className.replace(find(selector), ' ');
       },
       toggle: function(selector) {
         if (this.contains(selector)) this.remove(selector);
@@ -64,8 +64,8 @@
 
   Classy.prototype.on = function(ev, fn, cap) {
     window.addEventListener
-      ? this.el.addEventListener(ev, fn, !!cap)
-      : this.el.attachEvent('on' + ev, fn);
+      ? this.element.addEventListener(ev, fn, !!cap)
+      : this.element.attachEvent('on' + ev, fn);
   };
 
   return Classy;
