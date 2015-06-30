@@ -1,11 +1,22 @@
-var cla$$ = (function() {
-  'use strict';
-  var classList = document.documentElement.classList,
-      get_class = function(string) {return new RegExp('(^| )' + string + '( |$)', 'g');}
+/* jshint expr: true, laxbreak: true */
 
-  function RAD(selector) {
-    if (!(this instanceof RAD)) {
-      return new RAD(selector);
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    //AMD
+    define(factory);
+  } else if (typeof exports === 'object') {
+    //Node, CommonJS
+    module.exports = factory;
+  } else {
+    //Browser (root is window)
+    root.cla$$ = factory();
+  }
+})(this, function() {
+  'use strict';
+
+  function Classy(selector) {
+    if (!(this instanceof Classy)) {
+      return new Classy(selector);
     }
     if (typeof selector === 'string') {
       this.el = document.querySelector(selector);
@@ -15,29 +26,60 @@ var cla$$ = (function() {
     }
   }
 
-  RAD.prototype = {
-    contains: function(_class) {
-      if (classList) return this.el.classList.contains(_class);
-      return get_class(_class).test(this.el.className);
-    },
-    add: function(_class) {
-      if (classList) this.el.classList.add(_class);
-      else if (!this.contains(_class)) this.el.className += ' ' + _class;
-    },
-    remove: function(_class) {
-      if (classList) this.el.classList.remove(_class);
-      this.el.className = this.el.className.replace(get_class(_class), ' ');
-    },
-    toggle: function(_class) {
-      if (classList) this.el.classList.toggle(_class);
-      else if (this.contains(_class)) this.remove(_class);
-      else this.add(_class);
-    },
-    event: function(ev, fn, cap) {
-      if (this.el.addEventListener) return this.el.addEventListener(ev, fn, !!cap);
-      else this.el.attachEvent('on' + ev, fn);
+  function find(string) {
+      return new RegExp('(^| )' + string + '( |$)', 'g');
+  }
+
+  function eachSelector(classes) {
+    classes = Array.prototype.slice.call(arguments, 1);
+    for (var i = classes.length; i--;) {
+      classes[i];
+      console.log(classes[i]);
     }
+  }
+
+  document.documentElement.classList
+
+    ? Classy.prototype = {
+      contains: function(selector) {
+        return this.el.classList.contains(selector);
+      },
+      add: function() {
+        var classes = arguments;
+        for (var i = 0, length = classes.length; i < length; i++) {
+          this.el.classList.add(classes[i]);
+        }
+      },
+      remove: function(selector) {
+        this.el.classList.remove(selector);
+      },
+      toggle: function(selector) {
+        this.el.classList.toggle(selector);
+      }
+    }
+
+    : Classy.prototype = {
+      contains: function(selector) {
+        return find(selector).test(this.el.className);
+      },
+      add: function(selector) {
+        if (!this.contains(selector)) this.el.className += ' ' + selector;
+      },
+      remove: function(selector) {
+        this.el.className = this.el.className.replace(find(selector), ' ');
+      },
+      toggle: function(selector) {
+        if (this.contains(selector)) this.remove(selector);
+        else this.add(selector);
+      }
+    }
+  ;
+
+  Classy.prototype.on = function(ev, fn, cap) {
+    window.addEventListener
+      ? this.el.addEventListener(ev, fn, !!cap)
+      : this.el.attachEvent('on' + ev, fn);
   };
 
-  return RAD;
-})();
+  return Classy;
+});
