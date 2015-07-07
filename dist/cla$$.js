@@ -12,61 +12,72 @@
 })(this, function() {
   'use strict';
 
+  var SPACES = '[ \f\n\r\t\v]';
+  var BEGIN = '(^|' + SPACES + ')';
+  var END = '(' + SPACES + '|$)';
+
   function Classy(selector) {
     if (!(this instanceof Classy)) {
       return new Classy(selector);
     }
     if (typeof selector === 'string') {
-      this.element = document.querySelector(selector);
+      this.el = document.querySelector(selector);
     }
     if (typeof selector === 'object' && selector.nodeType || selector === window) {
-      this.element = selector;
+      this.el = selector;
     }
   }
 
   function find(string) {
-      return new RegExp('(^| )' + string + '( |$)', 'g');
+      return new RegExp(BEGIN + string + END);
   }
 
-  document.documentElement.classList
-
-    ? Classy.prototype = {
-      contains: function(selector) {
-        return this.element.classList.contains(selector);
+  Classy.prototype = document.documentElement.classList
+    ? {
+      contains: function() {
+        return this.el.classList.contains(arguments[0]);
       },
-      add: function(selector) {
-        this.element.classList.add(selector);
+      add: function() {
+        this.el.classList.add.apply(this.el.classList, arguments);
       },
-      remove: function(selector) {
-        this.element.classList.remove(selector);
+      remove: function() {
+        this.el.classList.remove.apply(this.el.classList, arguments);
       },
-      toggle: function(selector) {
-        this.element.classList.toggle(selector);
+      toggle: function() {
+        this.el.classList.toggle(arguments[0]);
       }
     }
 
-    : Classy.prototype = {
-      contains: function(selector) {
-        return find(selector).test(this.element.className);
+    : {
+      contains: function() {
+        return find(arguments[0]).test(this.el.className);
       },
-      add: function(selector) {
-        if (!this.contains(selector)) this.element.className += ' ' + selector;
+      add: function() {
+        for (var i=0, len = arguments.length; i < len; i++) {
+          if (!this.contains(arguments[i])) this.el.className += (this.el.className ? ' ': '') + arguments[i];
+        }
       },
-      remove: function(selector) {
-        this.element.className = this.element.className.replace(find(selector), ' ');
+      remove: function() {
+        for (var i=0, len = arguments.length; i < len; i++) {
+          this.el.className = this.el.className
+            .replace(find(arguments[i]), ' ')
+            .replace(/^\s+/, '')
+            .replace(/\s+$/, '');
+        }
       },
-      toggle: function(selector) {
-        if (this.contains(selector)) this.remove(selector);
-        else this.add(selector);
+      toggle: function() {
+          this.contains(arguments[0]) ? this.remove(arguments[0]) : this.add(arguments[0]);
       }
     }
   ;
 
   Classy.prototype.on = function(ev, fn, cap) {
-    window.addEventListener
-      ? this.element.addEventListener(ev, fn, !!cap)
-      : this.element.attachEvent('on' + ev, fn);
-  };
+  if (!window.addEventListener) {
+    return this.el.attachEvent(ev, fn);
+  }
+
+  this.el.addEventListener(ev, fn, cap);
+};
 
   return Classy;
 });
