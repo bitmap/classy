@@ -3,6 +3,7 @@ var mochaPhantomJS = require("gulp-mocha-phantomjs");
 var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
+var watch = require('gulp-watch');
 
 gulp.task('jshint', function () {
   return gulp.src('src/cla$$.js')
@@ -20,10 +21,20 @@ gulp.task('dist', function() {
 });
 
 gulp.task('test', function () {
-    return gulp
-    .src('test/test.html')
+    return gulp.src('test/test.html')
     .pipe(mochaPhantomJS());
 });
+
+
+gulp.task('watch', function () {
+  gulp.watch('src/*.js', ['jshint', 'test']);
+});
+
+gulp.task('dev', [
+  'jshint',
+  'test',
+  'watch'
+]);
 
 gulp.task('default', [
   'jshint',
