@@ -1,37 +1,41 @@
-var should  = chai.should();
-var div = cla$$('#testElement').el;
+function classyTest() {
+  cla$$('#testElement').add('ADD_1');
+  cla$$('#testElement').remove('REMOVE_1');
 
-function pizzaTest() {
-  cla$$('#testElement').add('ADD_1', 'ADD_2');
-  cla$$('#testElement').remove('REMOVE_1', 'REMOVE_2');
   cla$$('#testElement').toggle('TOGGLE_ON');
   cla$$('#testElement').toggle('TOGGLE_OFF');
 
-  if (cla$$('#testElement').contains('CONTAINS')) {
+  if (cla$$('#testElement').contains('CONTAINS') === true) {
     cla$$('#testElement').add('PASS');
-  }
-  else {
-    cla$$('#testElement').el.className += ' FAIL';
+    cla$$('#testElement').remove('CONTAINS');
   }
 
   cla$$('#testElement').on('click', function() {
-    cla$$(this).add('CLICKED');
+    cla$$('#testElement').add('CLICKED');
   });
 
-  cla$$('#testElement').el.click();
+  cla$$('.testList').add('imHere');
+
+  // cla$$('.testList li').on('click', function() {
+  //   cla$$(this.el).add('pass');
+  // });
+
+  document.getElementById('testElement').click();
 }
 
-cla$$(window).on('load', pizzaTest);
+  window.addEventListener('load', classyTest);
+
+// The Test
+var should  = chai.should();
+var div = document.getElementById('testElement');
 
 describe('cla$$', function(){
     it('add', function() {
       div.className.should.contain('ADD_1');
-      div.className.should.contain('ADD_2');
     });
 
     it('remove', function() {
       div.className.should.not.contain('REMOVE_1');
-      div.className.should.not.contain('REMOVE_2');
     });
 
     it('toggle', function() {
@@ -41,7 +45,7 @@ describe('cla$$', function(){
 
     it('contains', function() {
       div.className.should.contain('PASS');
-      div.className.should.not.contain('FAIL');
+      div.className.should.not.contain('CONTAINS');
     });
 
     it('on', function() {
