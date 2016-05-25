@@ -1,6 +1,6 @@
 {
   "name": "classy.js",
-  "description": "Cross-browser classList and event micro-library",
+  "description": "DOM class manipulation and event micro-library",
   "main": "dist/cla$$y.js",
   "authors": [
     "Cabe Branson (@bitmap)"
