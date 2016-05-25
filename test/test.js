@@ -1,51 +1,71 @@
-var should  = chai.should();
-var div = cla$$('#testElement').el;
+var $ = cla$$y;
+var testEl = $('.testElement');
+var testID = $('#test3');
 
-function pizzaTest() {
-  cla$$('#testElement').add('ADD_1', 'ADD_2');
-  cla$$('#testElement').remove('REMOVE_1', 'REMOVE_2');
-  cla$$('#testElement').toggle('TOGGLE_ON');
-  cla$$('#testElement').toggle('TOGGLE_OFF');
+function classyTest() {
 
-  if (cla$$('#testElement').contains('CONTAINS')) {
-    cla$$('#testElement').add('PASS');
-  }
-  else {
-    cla$$('#testElement').el.className += ' FAIL';
-  }
+  console.log(testEl.el[0] === document.querySelectorAll('.testElement')[0]);
 
-  cla$$('#testElement').on('click', function() {
-    cla$$(this).add('CLICKED');
+  testEl.el.each(function(e) {
+    e.innerHTML = 'PASSED';
   });
 
-  cla$$('#testElement').el.click();
+  testEl.add('ADD_1');
+  testEl.remove('REMOVE_1');
+
+  testEl.toggle('TOGGLE_ON');
+  testEl.toggle('TOGGLE_OFF');
+
+  if (testEl.contains('testElement')) {
+    testEl.add('PASS');
+    testEl.remove('CONTAINS');
+  }
+
+  testEl.on('click', function() {
+    testEl.add('CLICKED');
+  });
+
+  testEl.el.each(function(el) {
+    el.click();
+  });
+
 }
 
-cla$$(window).on('load', pizzaTest);
+$(window).on('load', classyTest);
 
-describe('cla$$', function(){
+// The Test
+var should  = chai.should();
+var test1 = document.getElementById('test1');
+var test2 = document.getElementById('test2');
+
+describe('cla$$y.js', function(){
     it('add', function() {
-      div.className.should.contain('ADD_1');
-      div.className.should.contain('ADD_2');
+      test1.className.should.contain('ADD_1');
+      test2.className.should.contain('ADD_1');
     });
 
     it('remove', function() {
-      div.className.should.not.contain('REMOVE_1');
-      div.className.should.not.contain('REMOVE_2');
+      test1.className.should.not.contain('REMOVE_1');
+      test2.className.should.not.contain('REMOVE_1');
     });
 
     it('toggle', function() {
-      div.className.should.contain('TOGGLE_ON');
-      div.className.should.not.contain('TOGGLE_OFF');
+      test1.className.should.contain('TOGGLE_ON');
+      test2.className.should.contain('TOGGLE_ON');
+      test1.className.should.not.contain('TOGGLE_OFF');
+      test2.className.should.not.contain('TOGGLE_OFF');
     });
 
     it('contains', function() {
-      div.className.should.contain('PASS');
-      div.className.should.not.contain('FAIL');
+      test1.className.should.contain('PASS');
+      test2.className.should.contain('PASS');
+      test1.className.should.not.contain('CONTAINS');
+      test2.className.should.not.contain('CONTAINS');
     });
 
     it('on', function() {
-      div.className.should.contain('CLICKED');
+      test1.className.should.contain('CLICKED');
+      test2.className.should.contain('CLICKED');
     });
 
 

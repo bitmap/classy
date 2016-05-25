@@ -1,0 +1,17 @@
+{
+  "name": "classy.js",
+  "description": "Cross-browser classList and event micro-library",
+  "main": "dist/cla$$y.js",
+  "authors": [
+    "Cabe Branson (@bitmap)"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/bitmap/classy",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
