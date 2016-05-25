@@ -6,14 +6,14 @@ var rename = require('gulp-rename');
 var watch = require('gulp-watch');
 
 gulp.task('jshint', function () {
-  return gulp.src('src/cla$$.js')
+  return gulp.src('src/*.js')
     .pipe(jshint())
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('jshint-stylish'));
 });
 
 gulp.task('dist', function() {
-  return gulp.src('src/cla$$.js')
+  return gulp.src('src/*.js')
     .pipe(gulp.dest('dist/'))
     .pipe(rename({ suffix: '.min' }))
     .pipe(uglify())
@@ -21,7 +21,7 @@ gulp.task('dist', function() {
 });
 
 gulp.task('test', function () {
-    return gulp.src('test/test.html')
+    return gulp.src('test/index.html')
     .pipe(mochaPhantomJS());
 });
 

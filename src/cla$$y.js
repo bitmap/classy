@@ -7,7 +7,7 @@
     module.exports = factory;
   } else {
     //Browser (root is window)
-    root.cla$$ = factory();
+    root.cla$$y = factory();
   }
 })(this, function() {
   'use strict';
@@ -18,9 +18,13 @@
     }
     if (typeof selector === 'string') {
       this.el = document.querySelectorAll(selector);
+
+      if (this.el.length === 1) this.el = this.el[0];
+
       this.el.each = Array.prototype.forEach;
     }
     if (typeof selector === 'object' && selector.nodeType || selector === window) {
+      this.obj = true;
       this.el = selector;
     }
   }
@@ -51,9 +55,13 @@
     },
 
     on: function(ev, fn, cap) {
-      this.el.each(function(elem) {
-        elem.addEventListener(ev, fn, cap);
-      });
+      if (!this.obj) {
+        this.el.each(function(elem) {
+          elem.addEventListener(ev, fn, cap);
+        });
+      } else {
+        this.el.addEventListener(ev, fn, cap);
+      }
     }
   };
 
