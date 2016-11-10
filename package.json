@@ -14,14 +14,15 @@
   },
   "homepage": "https://github.com/bitmap/classy#readme",
   "devDependencies": {
+    "babel-eslint": "^6.1.2",
     "chai": "^3.0.0",
+    "eslint-config-airbnb-es5": "^1.1.0",
+    "eslint-plugin-react": "^6.6.0",
     "gulp": "^3.9.1",
-    "gulp-jshint": "^1.11.1",
     "gulp-mocha-phantomjs": "^0.11.0",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.2.0",
     "gulp-watch": "^4.2.4",
-    "jshint-stylish": "^2.0.1",
     "mocha": "^2.4.5"
   }
 }

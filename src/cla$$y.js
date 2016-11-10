@@ -1,4 +1,4 @@
-(function(root, factory) {
+(function define(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD
     define(factory);
@@ -9,11 +9,12 @@
     // Browser (root is window)
     root.cla$$y = factory();
   }
-})(this, function() {
+})(this, function cla$$y() {
   'use strict';
 
   function Classy(selector) {
-    var object = false;
+    var classes = [];
+    var isObject = false;
 
     if (!(this instanceof Classy)) {
       return new Classy(selector);
@@ -22,68 +23,73 @@
       this.nodes = document.querySelectorAll(selector);
     }
     if (typeof selector === 'object' && selector.nodeType || selector === window) {
-      object = true;
+      isObject = true;
       this.nodes = selector;
     }
 
-    this.each = function(callback, scope) {
-      var nodes = this.nodes;
+    var nodes = this.nodes;
 
-      if (nodes.length !== undefined) {
-        for (var i = 0; i < nodes.length; i++) {
-          callback.call(scope, nodes[i]);
-        }
-      } else {
-        callback.call(scope, nodes);
+    function each(callback, scope) {
+      for (var i = 0; i < nodes.length; i++) {
+        callback.call(scope, nodes[i]);
       }
-    };
-    this.contains = function(className) {
-      var contains = false;
+    }
 
-      this.each(function(el) {
+    function contains(className) {
+      var hasClass = false;
+
+      each(function loop(el) {
         if (el.classList.contains(className)) {
-          contains = true;
+          hasClass = true;
         }
       });
-      return contains;
-    };
+      return hasClass;
+    }
 
-    this.add = function() {
-      var classes = arguments;
-      this.each(function(elem) {
+    function add() {
+      classes = arguments;
+      each(function loop(elem) {
         for (var i = 0; i < classes.length; i++) {
           elem.classList.add(classes[i]);
         }
       });
-    };
+    }
 
-    this.remove = function(className) {
-      var classes = arguments;
-      this.each(function(elem) {
+    function remove() {
+      classes = arguments;
+      each(function loop(elem) {
         for (var i = 0; i < classes.length; i++) {
           elem.classList.remove(classes[i]);
         }
       });
-    };
+    }
 
-    this.toggle = function(className) {
-      var classes = arguments;
-      this.each(function(elem) {
+    function toggle() {
+      classes = arguments;
+      each(function loop(elem) {
         for (var i = 0; i < classes.length; i++) {
           elem.classList.toggle(classes[i]);
         }
       });
-    };
+    }
 
-    this.on = function(ev, fn, cap) {
-      if (!object) {
-        this.each(function(elem) {
+    function on(ev, fn, cap) {
+      if (!isObject) {
+        each(function loop(elem) {
           elem.addEventListener(ev, fn, cap);
         });
       } else {
-        this.nodes.addEventListener(ev, fn, cap);
+        nodes.addEventListener(ev, fn, cap);
       }
-    };
+    }
+
+    // API
+    this.each = each;
+    this.contains = contains;
+    this.add = add;
+    this.remove = remove;
+    this.toggle = toggle;
+    this.on = on;
   }
 
   return Classy;

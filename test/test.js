@@ -2,6 +2,9 @@ var $ = cla$$y;
 var test = $('.testElement');
 
 function classyTest() {
+
+  $('#singleElement').add('pizza');
+  
   test.each(function(e) {
     test.add('EACH','ADD_1');
   });
