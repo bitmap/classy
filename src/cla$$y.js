@@ -1,69 +1,90 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
-    //AMD
+    // AMD
     define(factory);
   } else if (typeof exports === 'object') {
-    //Node, CommonJS
+    // Node, CommonJS
     module.exports = factory;
   } else {
-    //Browser (root is window)
+    // Browser (root is window)
     root.cla$$y = factory();
   }
 })(this, function() {
   'use strict';
 
   function Classy(selector) {
+    var object = false;
+
     if (!(this instanceof Classy)) {
       return new Classy(selector);
     }
     if (typeof selector === 'string') {
-      this.el = document.querySelectorAll(selector);
-
-      if (this.el.length === 1) this.el = this.el[0];
-
-      this.el.each = Array.prototype.forEach;
+      this.nodes = document.querySelectorAll(selector);
     }
     if (typeof selector === 'object' && selector.nodeType || selector === window) {
-      this.obj = true;
-      this.el = selector;
+      object = true;
+      this.nodes = selector;
     }
-  }
 
-  Classy.prototype = {
-    contains: function(selector) {
-      for (var i = 0; i < this.el.length; i++) {
-        return this.el[i].classList.contains(selector);
+    this.each = function(callback, scope) {
+      var nodes = this.nodes;
+
+      if (nodes.length !== undefined) {
+        for (var i = 0; i < nodes.length; i++) {
+          callback.call(scope, nodes[i]);
+        }
+      } else {
+        callback.call(scope, nodes);
       }
-    },
+    };
+    this.contains = function(className) {
+      var contains = false;
 
-    add: function(selector) {
-      this.el.each(function(elem) {
-        elem.classList.add(selector);
+      this.each(function(el) {
+        if (el.classList.contains(className)) {
+          contains = true;
+        }
       });
-    },
+      return contains;
+    };
 
-    remove: function(selector) {
-      this.el.each(function(elem) {
-        elem.classList.remove(selector);
+    this.add = function() {
+      var classes = arguments;
+      this.each(function(elem) {
+        for (var i = 0; i < classes.length; i++) {
+          elem.classList.add(classes[i]);
+        }
       });
-    },
+    };
 
-    toggle: function(selector) {
-      this.el.each(function(elem) {
-        elem.classList.toggle(selector);
+    this.remove = function(className) {
+      var classes = arguments;
+      this.each(function(elem) {
+        for (var i = 0; i < classes.length; i++) {
+          elem.classList.remove(classes[i]);
+        }
       });
-    },
+    };
 
-    on: function(ev, fn, cap) {
-      if (!this.obj) {
-        this.el.each(function(elem) {
+    this.toggle = function(className) {
+      var classes = arguments;
+      this.each(function(elem) {
+        for (var i = 0; i < classes.length; i++) {
+          elem.classList.toggle(classes[i]);
+        }
+      });
+    };
+
+    this.on = function(ev, fn, cap) {
+      if (!object) {
+        this.each(function(elem) {
           elem.addEventListener(ev, fn, cap);
         });
       } else {
-        this.el.addEventListener(ev, fn, cap);
+        this.nodes.addEventListener(ev, fn, cap);
       }
-    }
-  };
+    };
+  }
 
   return Classy;
 });

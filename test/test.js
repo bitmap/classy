@@ -1,31 +1,27 @@
 var $ = cla$$y;
-var testEl = $('.testElement');
-var testID = $('#test3');
+var test = $('.testElement');
 
 function classyTest() {
-
-  console.log(testEl.el[0] === document.querySelectorAll('.testElement')[0]);
-
-  testEl.el.each(function(e) {
-    e.innerHTML = 'PASSED';
+  test.each(function(e) {
+    test.add('EACH','ADD_1');
   });
 
-  testEl.add('ADD_1');
-  testEl.remove('REMOVE_1');
+  // test.add('ADD_1');
+  test.remove('REMOVE_1','REMOVE_2');
 
-  testEl.toggle('TOGGLE_ON');
-  testEl.toggle('TOGGLE_OFF');
+  test.toggle('TOGGLE_ON','TOGGLED');
+  test.toggle('TOGGLE_OFF','TOGGLED');
 
-  if (testEl.contains('testElement')) {
-    testEl.add('PASS');
-    testEl.remove('CONTAINS');
+  if (test.contains('testElement')) {
+    test.add('PASS');
+    test.remove('CONTAINS');
   }
 
-  testEl.on('click', function() {
-    testEl.add('CLICKED');
+  test.on('click', function() {
+    test.add('CLICKED');
   });
 
-  testEl.el.each(function(el) {
+  test.each(function(el) {
     el.click();
   });
 
@@ -39,6 +35,15 @@ var test1 = document.getElementById('test1');
 var test2 = document.getElementById('test2');
 
 describe('cla$$y.js', function(){
+    it('nodes', function() {
+      test.nodes[0] === document.querySelectorAll('.testElement')[0];
+    });
+
+    it('each', function() {
+      test1.className.should.contain('EACH');
+      test2.className.should.contain('EACH');
+    });
+
     it('add', function() {
       test1.className.should.contain('ADD_1');
       test2.className.should.contain('ADD_1');
@@ -47,6 +52,8 @@ describe('cla$$y.js', function(){
     it('remove', function() {
       test1.className.should.not.contain('REMOVE_1');
       test2.className.should.not.contain('REMOVE_1');
+      test1.className.should.not.contain('REMOVE_2');
+      test2.className.should.not.contain('REMOVE_2');
     });
 
     it('toggle', function() {
@@ -54,6 +61,8 @@ describe('cla$$y.js', function(){
       test2.className.should.contain('TOGGLE_ON');
       test1.className.should.not.contain('TOGGLE_OFF');
       test2.className.should.not.contain('TOGGLE_OFF');
+      test1.className.should.not.contain('TOGGLED');
+      test2.className.should.not.contain('TOGGLED');
     });
 
     it('contains', function() {
