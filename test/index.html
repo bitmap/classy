@@ -2,21 +2,17 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>cla$$y.js test</title>
+    <title>classy.js test</title>
     <link rel="stylesheet" href="../node_modules/mocha/mocha.css" />
   </head>
   <body>
     <div id="mocha"></div>
-
     <div id="singleElement"></div>
-    
-    <button id="test1" class="testElement REMOVE_1 TOGGLE_OFF CONTAINS">Button 1</button>
-    <button id="test2" class="testElement REMOVE_1 TOGGLE_OFF CONTAINS">Button 2</button>
-    <button id="test3" class="testElement REMOVE_1 TOGGLE_OFF CONTAINS">Button 3</button>
-
+    <button id="test1" class="testElement">Test 1</button>
+    <button id="test2" class="testElement">Test2 2</button>
     <script src="../node_modules/mocha/mocha.js"></script>
     <script src="../node_modules/chai/chai.js"></script>
-    <script src="../src/cla$$y.js"></script>
+    <script src="../dist/classy.min.js"></script>
     <script>
       mocha.ui('bdd');
       mocha.reporter('html');
@@ -24,8 +20,7 @@
     </script>
     <script src="test.js"></script>
     <script>
-      if (window.mochaPhantomJS) { mochaPhantomJS.run(); }
-      else { mocha.run(); }
+      mocha.run();
     </script>
   </body>
 </html>
