@@ -38,8 +38,8 @@
     function contains(className) {
       var hasClass = false;
 
-      each(function loop(el) {
-        if (el.classList.contains(className)) {
+      each(function(elem) {
+        if (elem.classList.contains(className)) {
           hasClass = true;
         }
       });
@@ -48,7 +48,7 @@
 
     function add() {
       classes = arguments;
-      each(function loop(elem) {
+      each(function(elem) {
         for (var i = 0; i < classes.length; i++) {
           elem.classList.add(classes[i]);
         }
@@ -57,7 +57,7 @@
 
     function remove() {
       classes = arguments;
-      each(function loop(elem) {
+      each(function(elem) {
         for (var i = 0; i < classes.length; i++) {
           elem.classList.remove(classes[i]);
         }
@@ -66,7 +66,7 @@
 
     function toggle() {
       classes = arguments;
-      each(function loop(elem) {
+      each(function(elem) {
         for (var i = 0; i < classes.length; i++) {
           elem.classList.toggle(classes[i]);
         }
@@ -75,7 +75,7 @@
 
     function on(ev, fn, cap) {
       if (!isObject) {
-        each(function loop(elem) {
+        each(function(elem) {
           elem.addEventListener(ev, fn, cap);
         });
       } else {
