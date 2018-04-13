@@ -1,96 +1,79 @@
-(function define(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD
-    define(factory);
-  } else if (typeof exports === 'object') {
-    // Node, CommonJS
-    module.exports = factory;
-  } else {
-    // Browser (root is window)
-    root.cla$$y = factory();
-  }
-})(this, function cla$$y() {
-  'use strict';
+class Money {
+  constructor(selector) {
+    this.selector = selector
+    this.isObject = false;
+    this.nodes = null;
 
-  function Classy(selector) {
-    var classes = [];
-    var isObject = false;
-
-    if (!(this instanceof Classy)) {
-      return new Classy(selector);
+    if (typeof this.selector === 'string') {
+      this.nodes = document.querySelectorAll(this.selector);
     }
-    if (typeof selector === 'string') {
-      this.nodes = document.querySelectorAll(selector);
-    }
-    if (typeof selector === 'object' && selector.nodeType || selector === window) {
-      isObject = true;
+    if (typeof this.selector === 'object' && this.selector.nodeType || this.selector === window) {
+      this.isObject = true;
       this.nodes = selector;
     }
 
-    var nodes = this.nodes;
-
-    function each(callback, scope) {
-      for (var i = 0; i < nodes.length; i++) {
-        callback.call(scope, nodes[i]);
-      }
-    }
-
-    function contains(className) {
-      var hasClass = false;
-
-      each(elem => {
-        if (elem.classList.contains(className)) {
-          hasClass = true;
-        }
-      });
-      return hasClass;
-    }
-
-    function add() {
-      classes = arguments;
-      each(elem => {
-        for (var i = 0; i < classes.length; i++) {
-          elem.classList.add(classes[i]);
-        }
-      });
-    }
-
-    function remove() {
-      classes = arguments;
-      each(elem => {
-        for (var i = 0; i < classes.length; i++) {
-          elem.classList.remove(classes[i]);
-        }
-      });
-    }
-
-    function toggle() {
-      classes = arguments;
-      each(elem => {
-        for (var i = 0; i < classes.length; i++) {
-          elem.classList.toggle(classes[i]);
-        }
-      });
-    }
-
-    function on(ev, fn, cap) {
-      if (!isObject) {
-        each(elem => {
-          elem.addEventListener(ev, fn, cap);
-        });
-      } else {
-        nodes.addEventListener(ev, fn, cap);
-      }
-    }
-
-    // API
-    this.each = each;
-    this.contains = contains;
-    this.add = add;
-    this.remove = remove;
-    this.toggle = toggle;
-    this.on = on;
+    this.classes = [];
+    this.each = this.each.bind(this)
+    this.contains = this.contains.bind(this)
+    this.add = this.add.bind(this)
+    this.remove = this.remove.bind(this)
+    this.toggle = this.toggle.bind(this)
+    this.on = this.on.bind(this)
   }
 
-  return Classy;
-});
+  each(callback, scope) {
+    for (let i = 0; i < this.nodes.length; i += 1) {
+      callback.call(scope, this.nodes[i]);
+    }
+  }
+
+  contains(className) {
+    let hasClass = false;
+
+    this.each(elem => {
+      if (elem.classList.contains(className)) {
+        hasClass = true;
+      }
+    });
+    return hasClass;
+  }
+
+  add() {
+    this.classes = arguments;
+    this.each(elem => {
+      for (let i = 0; i < this.classes.length; i += 1) {
+        elem.classList.add(this.classes[i]);
+      }
+    });
+  }
+
+  remove() {
+    this.classes = arguments;
+    this.each(elem => {
+      for (let i = 0; i < this.classes.length; i += 1) {
+        elem.classList.remove(this.classes[i]);
+      }
+    });
+  }
+
+  toggle() {
+    this.classes = arguments;
+    this.each(elem => {
+      for (let i = 0; i < this.classes.length; i += 1) {
+        elem.classList.toggle(this.classes[i]);
+      }
+    });
+  }
+
+  on(ev, fn, cap) {
+    if (!this.isObject) {
+      this.each(elem => {
+        elem.addEventListener(ev, fn, cap);
+      });
+    } else {
+      this.nodes.addEventListener(ev, fn, cap);
+    }
+  }
+}
+
+export default $ => new Money($)
