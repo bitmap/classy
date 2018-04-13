@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "cp src/classy.js dist/classy.js",
-    "test": "mocha test/bootstrap.js --recursive test",
+    "test": "polyserve src",
     "uglify": "uglifyjs dist/classy.js -c -o dist/classy.min.js"
   },
   "author": "Cabe Branson (@bitmap)",
@@ -25,8 +25,7 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.11.0",
     "mocha": "^4.0.1",
-    "mocha-phantomjs": "^4.1.0",
-    "puppeteer": "^0.13.0",
+    "polyserve": "^0.13.0",
     "uglify-js": "^2.8.29"
   }
 }

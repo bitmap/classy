@@ -1,35 +1,33 @@
-import $ from '../src/classy.js'
+import 'https://unpkg.com/chai@4.1.2/chai.js';
 
-$('#singleElement').add('pizza');
-let test = $('.testElement');
-test.each(() => {
-  test.add('EACH', 'ADD_1', 'REMOVE_1', 'REMOVE_2', 'DO_NOT_REMOVE');
-});
-test.remove('REMOVE_1', 'REMOVE_2');
-test.toggle('TOGGLE_ON', 'TOGGLE_OFF');
-test.toggle('TOGGLE_OFF', 'TOGGLE_ON');
-test.toggle('TOGGLED');
-if (test.contains('testElement')) {
-  test.add('PASS');
-  test.remove('CONTAINS');
+mocha.setup('bdd');
+
+import $ from './classy.js'
+
+const testID = $('#singleElement');
+const testClass = $('.testElement');
+
+testID.add('PIZZA');
+testClass.add('EACH', 'ADD_1', 'REMOVE_1', 'REMOVE_2', 'DO_NOT_REMOVE');
+testClass.remove('REMOVE_1', 'REMOVE_2');
+testClass.toggle('TOGGLE_ON', 'TOGGLE_OFF');
+testClass.toggle('TOGGLE_OFF', 'TOGGLE_ON');
+testClass.toggle('TOGGLED');
+testClass.on('click', () => testClass.add('CLICKED'));
+testClass.each(el => el.click());
+if (testClass.contains('CLICKED')) {
+  testClass.add('PASS');
+  testClass.remove('CONTAINS');
 }
-test.on('click', () => {
-  test.add('CLICKED');
-});
-test.each(function (el) {
-  el.click();
-});
-
-$(window).on('load', () => console.log('window loaded'));
 
 // The Test
 let should = chai.should();
 let test1 = document.getElementById('test1');
 let test2 = document.getElementById('test2');
 
-describe('classy.js', () => {
+describe('new money', () => {
   it('nodes', () => {
-    test.nodes[0] === document.querySelectorAll('.testElement')[0];
+    testID.nodes[0] === document.querySelectorAll('.PIZZA')[0];
   });
 
   it('each', () => {
@@ -72,3 +70,6 @@ describe('classy.js', () => {
     test2.className.should.contain('CLICKED');
   });
 });
+
+mocha.checkLeaks();
+mocha.run();
