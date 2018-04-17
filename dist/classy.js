@@ -1,96 +1,111 @@
-(function define(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD
-    define(factory);
-  } else if (typeof exports === 'object') {
-    // Node, CommonJS
-    module.exports = factory;
-  } else {
-    // Browser (root is window)
-    root.cla$$y = factory();
-  }
-})(this, function cla$$y() {
-  'use strict';
+'use strict';
 
-  function Classy(selector) {
-    var classes = [];
-    var isObject = false;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-    if (!(this instanceof Classy)) {
-      return new Classy(selector);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Money = function () {
+  function Money(selector) {
+    _classCallCheck(this, Money);
+
+    this.selector = selector;
+    this.isObject = false;
+    this.nodes = null;
+
+    if (typeof this.selector === 'string') {
+      this.nodes = document.querySelectorAll(this.selector);
     }
-    if (typeof selector === 'string') {
-      this.nodes = document.querySelectorAll(selector);
-    }
-    if (typeof selector === 'object' && selector.nodeType || selector === window) {
-      isObject = true;
+    if (_typeof(this.selector) === 'object' && this.selector.nodeType || this.selector === window) {
+      this.isObject = true;
       this.nodes = selector;
     }
 
-    var nodes = this.nodes;
+    this.classes = [];
+    this.each = this.each.bind(this);
+    this.contains = this.contains.bind(this);
+    this.add = this.add.bind(this);
+    this.remove = this.remove.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.on = this.on.bind(this);
+  }
 
-    function each(callback, scope) {
-      for (var i = 0; i < nodes.length; i++) {
-        callback.call(scope, nodes[i]);
+  _createClass(Money, [{
+    key: 'each',
+    value: function each(callback, scope) {
+      for (var i = 0; i < this.nodes.length; i += 1) {
+        callback.call(scope, this.nodes[i]);
       }
     }
-
-    function contains(className) {
+  }, {
+    key: 'contains',
+    value: function contains(className) {
       var hasClass = false;
 
-      each(function(elem) {
+      this.each(function (elem) {
         if (elem.classList.contains(className)) {
           hasClass = true;
         }
       });
       return hasClass;
     }
+  }, {
+    key: 'add',
+    value: function add() {
+      var _this = this;
 
-    function add() {
-      classes = arguments;
-      each(function(elem) {
-        for (var i = 0; i < classes.length; i++) {
-          elem.classList.add(classes[i]);
+      this.classes = arguments;
+      this.each(function (elem) {
+        for (var i = 0; i < _this.classes.length; i += 1) {
+          elem.classList.add(_this.classes[i]);
         }
       });
     }
+  }, {
+    key: 'remove',
+    value: function remove() {
+      var _this2 = this;
 
-    function remove() {
-      classes = arguments;
-      each(function(elem) {
-        for (var i = 0; i < classes.length; i++) {
-          elem.classList.remove(classes[i]);
+      this.classes = arguments;
+      this.each(function (elem) {
+        for (var i = 0; i < _this2.classes.length; i += 1) {
+          elem.classList.remove(_this2.classes[i]);
         }
       });
     }
+  }, {
+    key: 'toggle',
+    value: function toggle() {
+      var _this3 = this;
 
-    function toggle() {
-      classes = arguments;
-      each(function(elem) {
-        for (var i = 0; i < classes.length; i++) {
-          elem.classList.toggle(classes[i]);
+      this.classes = arguments;
+      this.each(function (elem) {
+        for (var i = 0; i < _this3.classes.length; i += 1) {
+          elem.classList.toggle(_this3.classes[i]);
         }
       });
     }
-
-    function on(ev, fn, cap) {
-      if (!isObject) {
-        each(function(elem) {
+  }, {
+    key: 'on',
+    value: function on(ev, fn, cap) {
+      if (!this.isObject) {
+        this.each(function (elem) {
           elem.addEventListener(ev, fn, cap);
         });
       } else {
-        nodes.addEventListener(ev, fn, cap);
+        this.nodes.addEventListener(ev, fn, cap);
       }
     }
+  }]);
 
-    // API
-    this.each = each;
-    this.contains = contains;
-    this.add = add;
-    this.remove = remove;
-    this.toggle = toggle;
-    this.on = on;
-  }
+  return Money;
+}();
 
-  return Classy;
-});
+exports.default = function ($) {
+  return new Money($);
+};

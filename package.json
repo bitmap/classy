@@ -8,9 +8,9 @@
     "url": "git+https://github.com/bitmap/classy.git"
   },
   "scripts": {
-    "build": "cp src/classy.js dist/classy.js",
-    "test": "polyserve src",
-    "uglify": "uglifyjs dist/classy.js -c -o dist/classy.min.js"
+    "test": "polyserve dist",
+    "build": "babel src --out-dir dist",
+    "minify": "uglifyjs dist/classy.js -c -o dist/classy.min.js"
   },
   "author": "Cabe Branson (@bitmap)",
   "license": "MIT",
@@ -19,13 +19,14 @@
   },
   "homepage": "https://github.com/bitmap/classy#readme",
   "devDependencies": {
-    "babel-eslint": "^7.2.3",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "chai": "^4.1.2",
-    "eslint": "^3.19.0",
+    "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.11.0",
     "mocha": "^4.0.1",
     "polyserve": "^0.13.0",
-    "uglify-js": "^2.8.29"
+    "uglify-js": "^3.3.21"
   }
 }
