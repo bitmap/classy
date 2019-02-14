@@ -1,6 +1,6 @@
 # new-money 💰
 
-**New Money** is a super basic DOM manipulation and event micro-library utilizing the [`classList`](https://developer.mozilla.org/en-US/docs/Web/API/Element/classList) and [`addEventListener`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) APIs.
+**New Money** is a basic DOM manipulation and event micro-library utilizing the [`classList`](https://developer.mozilla.org/en-US/docs/Web/API/Element/classList) and [`addEventListener`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) APIs.
 
 ## Install
 ```sh
