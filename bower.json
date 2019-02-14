@@ -1,0 +1,16 @@
+{
+  "name": "classy.js",
+  "description": "DOM class manipulation and event micro-library",
+  "main": "dist/cla$$y.js",
+  "authors": [
+    "Cabe Branson (@bitmap)"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/bitmap/classy",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ]
+}
