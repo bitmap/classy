@@ -1,32 +1,17 @@
 {
-  "name": "classy.js",
-  "version": "1.3.0",
+  "name": "new-money",
+  "version": "1.0.0",
   "description": "DOM class manipulation and event micro-library",
-  "main": "dist/classy.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bitmap/classy.git"
+  "main": "index.js",
+  "repository": "https://github.com/bitmap/new-money",
+  "scripts": {},
+  "author": {
+    "name": "Cabe Branson",
+    "url": "https://cabe.io"
   },
-  "scripts": {
-    "build": "cp src/classy.js dist/classy.js",
-    "test": "mocha test/bootstrap.js --recursive test",
-    "uglify": "uglifyjs dist/classy.js -c -o dist/classy.min.js"
-  },
-  "author": "Cabe Branson (@bitmap)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/bitmap/classy/issues"
-  },
-  "homepage": "https://github.com/bitmap/classy#readme",
+  "homepage": "https://github.com/bitmap/new-money",
   "devDependencies": {
-    "babel-eslint": "^7.2.3",
-    "chai": "^4.1.2",
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.11.0",
-    "mocha": "^4.0.1",
-    "mocha-phantomjs": "^4.1.0",
-    "puppeteer": "^0.13.0",
-    "uglify-js": "^2.8.29"
+    "eslint": "^5.13.0"
   }
 }
