@@ -1,6 +1,6 @@
 import $ from '../index.js'
 
-$('#test1').add('test')
+$('#test1').add`test`
 const test = $('.test')
 
 let count = 0
@@ -42,11 +42,11 @@ test.each(node => {
 $(window).on('load', () => console.log($))
 
 // The Test
-let should = chai.should()
-let expect = chai.expect
-let test1 = document.getElementById('testElement1')
-let test2 = document.getElementById('testElement2')
-let test3 = document.getElementById('testElement3')
+const should = chai.should()
+const expect = chai.expect
+const test1 = document.getElementById('testElement1')
+const test2 = document.getElementById('testElement2')
+const test3 = document.getElementById('testElement3')
 
 describe('new money', () => {
   it('nodes', () => {
