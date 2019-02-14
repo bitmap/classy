@@ -29,7 +29,7 @@ Money.prototype.contains = function(className) {
 
 Money.prototype.add = function(...args) {
   this.each(node => {
-    for (let i = 0; i < args.length; i += 1) {
+    for (let i = 0, {length} = args; i < length; i += 1) {
       node.classList.add(args[i]);
     }
   });
@@ -38,7 +38,7 @@ Money.prototype.add = function(...args) {
 
 Money.prototype.remove = function(...args) {
   this.each(node => {
-    for (let i = 0; i < args.length; i += 1) {
+    for (let i = 0, {length} = args; i < length; i += 1) {
       node.classList.remove(args[i]);
     }
   });
@@ -47,7 +47,7 @@ Money.prototype.remove = function(...args) {
 
 Money.prototype.toggle = function(...args) {
   this.each(node => {
-    for (let i = 0; i < args.length; i += 1) {
+    for (let i = 0, {length} = args; i < length; i += 1) {
       node.classList.toggle(args[i]);
     }
   });
