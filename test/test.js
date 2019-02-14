@@ -1,79 +1,124 @@
-var $ = cla$$y;
-var test = $('.testElement');
+import $ from '../index.js'
 
-function classyTest() {
-  $('#singleElement').add('pizza');
+$('#test1').add`test`
+const test = $('.test')
 
-  test.each(function(e) {
-    test.add('EACH', 'ADD_1', 'REMOVE_1', 'REMOVE_2');
-  });
+let count = 0
 
-  test.remove('REMOVE_1', 'REMOVE_2');
+test.each((node, i) => {
+  count = i + 1
+  node.id = `testElement${count}`
 
-  test.toggle('TOGGLE_ON', 'TOGGLE_OFF');
-  test.toggle('TOGGLE_OFF', 'TOGGLE_ON');
+  $(node).add('EACH')
+})
 
-  if (test.contains('testElement')) {
-    test.add('PASS');
-    test.remove('CONTAINS');
-  }
+$(test.nodes[0]).add('TEST1')
+$(test.nodes[1]).add('TEST2')
+$(test.nodes[2]).add('TEST3')
 
-  test.on('click', function() {
-    test.add('CLICKED');
-  });
+test.add('ADD_1', 'REMOVE_1', 'REMOVE_2', 'DO_NOT_REMOVE')
 
-  test.each(function(el) {
-    el.click();
-  });
+test
+  .add('CONTAINS')
+  .remove('REMOVE_1', 'REMOVE_2', 'EACH')
+  .toggle('TOGGLE_ON', 'TOGGLE_OFF', 'EACH')
+  .toggle('TOGGLE_OFF', 'TOGGLE_ON', 'EACH')
+  .toggle('TOGGLED', 'EACH')
+
+if (test.contains('CONTAINS')) {
+  test
+    .add('PASS')
+    .remove('CONTAINS')
 }
+test.on('click', (event) => {
+  test.add('CLICKED')
+  $(event.target).add('SCOPED')
+})
 
-$(window).on('load', classyTest);
+test.each(node => {
+  node.click()
+})
+
+$(window).on('load', () => console.log($))
 
 // The Test
-var should = chai.should();
-var test1 = document.getElementById('test1');
-var test2 = document.getElementById('test2');
+const should = chai.should()
+const expect = chai.expect
+const test1 = document.getElementById('testElement1')
+const test2 = document.getElementById('testElement2')
+const test3 = document.getElementById('testElement3')
 
-describe('classy.js', function() {
-  it('nodes', function() {
-    test.nodes[0] === document.querySelectorAll('.testElement')[0];
-  });
+describe('new money', () => {
+  it('nodes', () => {
+    const nodes = test.nodes
+    const node1 = nodes[0]
+    const node2 = document.querySelectorAll('.test')[0]
+    const $node = $(node1)
 
-  it('each', function() {
-    test1.className.should.contain('EACH');
-    test2.className.should.contain('EACH');
-  });
+    const testNode1 = node1 === node2
+    const testNode2 = node1 === $node.nodes[0]
 
-  it('add', function() {
-    test1.className.should.contain('ADD_1');
-    test2.className.should.contain('ADD_1');
-  });
+    node1.className.should.contain('test')
+    node2.className.should.contain('test')
+    expect(testNode1).to.equal(true)
+    expect(testNode2).to.equal(true)
+  })
 
-  it('remove', function() {
-    test1.className.should.not.contain('REMOVE_1');
-    test2.className.should.not.contain('REMOVE_1');
-    test1.className.should.not.contain('REMOVE_2');
-    test2.className.should.not.contain('REMOVE_2');
-  });
+  it('each', () => {
+    expect(count).to.equal(3)
+    test1.className.should.contain('EACH')
+    test2.className.should.contain('EACH')
+    test3.className.should.contain('EACH')
+    test1.className.should.contain('TEST1')
+    test2.className.should.contain('TEST2')
+    test3.className.should.contain('TEST3')
+  })
 
-  it('toggle', function() {
-    test1.className.should.not.contain('TOGGLE_ON');
-    test2.className.should.not.contain('TOGGLE_ON');
-    test1.className.should.not.contain('TOGGLE_OFF');
-    test2.className.should.not.contain('TOGGLE_OFF');
-    test1.className.should.not.contain('TOGGLED');
-    test2.className.should.not.contain('TOGGLED');
-  });
+  it('add', () => {
+    test1.className.should.contain('ADD_1')
+    test2.className.should.contain('ADD_1')
+    test3.className.should.contain('ADD_1')
+  })
 
-  it('contains', function() {
-    test1.className.should.contain('PASS');
-    test2.className.should.contain('PASS');
-    test1.className.should.not.contain('CONTAINS');
-    test2.className.should.not.contain('CONTAINS');
-  });
+  it('remove', () => {
+    test1.className.should.not.contain('REMOVE_1')
+    test2.className.should.not.contain('REMOVE_1')
+    test3.className.should.not.contain('REMOVE_1')
+    test1.className.should.not.contain('REMOVE_2')
+    test2.className.should.not.contain('REMOVE_2')
+    test3.className.should.not.contain('REMOVE_2')
+    test1.className.should.contain('DO_NOT_REMOVE')
+    test2.className.should.contain('DO_NOT_REMOVE')
+    test3.className.should.contain('DO_NOT_REMOVE')
+  })
 
-  it('on', function() {
-    test1.className.should.contain('CLICKED');
-    test2.className.should.contain('CLICKED');
-  });
-});
+  it('toggle', () => {
+    test1.className.should.not.contain('TOGGLE_ON')
+    test2.className.should.not.contain('TOGGLE_ON')
+    test3.className.should.not.contain('TOGGLE_ON')
+    test1.className.should.not.contain('TOGGLE_OFF')
+    test2.className.should.not.contain('TOGGLE_OFF')
+    test3.className.should.not.contain('TOGGLE_OFF')
+    test1.className.should.contain('TOGGLED')
+    test2.className.should.contain('TOGGLED')
+    test3.className.should.contain('TOGGLED')
+  })
+
+  it('contains', () => {
+    test1.className.should.contain('PASS')
+    test2.className.should.contain('PASS')
+    test3.className.should.contain('PASS')
+    test1.className.should.not.contain('CONTAINS')
+    test2.className.should.not.contain('CONTAINS')
+    test3.className.should.not.contain('CONTAINS')
+  })
+
+  it('on', () => {
+    test1.className.should.contain('CLICKED')
+    test2.className.should.contain('CLICKED')
+    test3.className.should.contain('CLICKED')
+    test1.className.should.contain('SCOPED')
+    test2.className.should.contain('SCOPED')
+    test3.className.should.contain('SCOPED')
+  })
+})
