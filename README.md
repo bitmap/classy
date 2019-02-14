@@ -1,6 +1,6 @@
-# new-money
+# new-money 💰
 
-**New Money** is a super basic DOM class manipulation and event micro-library utilizing the [`classList`](https://developer.mozilla.org/en-US/docs/Web/API/Element/classList) and [`addEventListener`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) APIs.
+**New Money** is a super basic DOM manipulation and event micro-library utilizing the [`classList`](https://developer.mozilla.org/en-US/docs/Web/API/Element/classList) and [`addEventListener`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) APIs.
 
 ## Install
 ```sh
@@ -23,44 +23,45 @@ const testNode2 = node1 === $node.nodes[0] // returns true
 ```
 
 ## API
-It supports `add`, `remove`, `toggle`, `contains`, methods for manipulating and checking classNames, an `each` method for iterating over the nodes, and `on` method for adding event listeners to each node.
+It supports `add`, `remove`, `toggle`, `contains` methods for manipulating and checking classNames, an `each` method for iterating over the nodes, and `on` method for adding event listeners to each node.
 
 You can `add`, `remove` or `toggle` class names:
 ```js
-const $pizzas = $('.pizza')
+const pizzas = $('.pizza')
 
-$pizzas.add('sauce', 'cheese')
+pizzas.add('sauce', 'cheese')
 
-if ($pizzas.contains('vegan')) {
-  $pizzas
+if (pizzas.contains('vegan')) {
+  pizzas
     .add('olives')
     .remove('cheese')
 } else {
-  $pizzas.toggle('pepperoni')
+  pizzas.toggle('pepperoni')
 }
 ```
 
 Add event listeners with `on`
 
 ```js
-$pizzas.on('click', event => {
-  const $pizza = $(event.target)
+pizzas.on('click', event => {
+  const pizza = $(event.target)
 
-  if ($pizza.contains('ham')) {
-    $pizza.add('pineapple')
+  if (pizza.contains('ham')) {
+    pizza.add('pineapple')
   }
 })
 ```
 
-You can query elements inside the array using the built in `.each` method. If you need to use anything from the native DOM, just query selectors like
+You can query elements inside the array using the built in `.each` method if you need to use anything from the native DOM. It's just using `forEach` under the hood.
 
 ```js
-$pizzas.each((pizza, i) => {
+pizzas.each((pizza, i) => {
   pizza.id = `pizza${i}`
 });
+
 ```
 
-Try it with all your favorite toppings.
+Try it with all your favorite toppings. 🍕
 
 ## License
 [MIT](https://github.com/bitmap/new-money/blob/master/LICENSE)
