@@ -50,7 +50,7 @@ const test3 = document.getElementById('testElement3')
 
 describe('new money', () => {
   it('nodes', () => {
-    const nodes = test.nodes
+    const { nodes } = $('.test')
     const node1 = nodes[0]
     const node2 = document.querySelectorAll('.test')[0]
     const $node = $(node1)

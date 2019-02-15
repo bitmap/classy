@@ -13,7 +13,7 @@ npm install new-money
 ```js
 import $ from 'new-money'
 
-const nodes = test.nodes // return NodeList
+const { nodes } = $('.test') // return NodeList
 const node1 = nodes[0] // return object
 const node2 = document.querySelectorAll('.test')[0] // return object
 const $node = $(node1) // returns array of objects
