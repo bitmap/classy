@@ -12,6 +12,6 @@
   "license": "MIT",
   "homepage": "https://github.com/bitmap/new-money",
   "devDependencies": {
-    "eslint": "^5.13.0"
+    "eslint": "^5.16.0"
   }
 }
