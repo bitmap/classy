@@ -1,6 +1,6 @@
 {
   "name": "new-money",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "DOM class manipulation and event micro-library",
   "main": "index.js",
   "repository": "https://github.com/bitmap/new-money",
